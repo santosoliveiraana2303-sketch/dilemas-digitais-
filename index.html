@@ -3,38 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dilemas Digitais & Soluções Contemporâneas</title>
+    <title>Dilemas Digitais v2.0</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
-            --accent-color: #38bdf8;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --solution-bg: rgba(56, 189, 248, 0.1);
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-color: #c9d1d9;
+            --heading-color: #f0f6fc;
+            --accent-color: #a855f7;
+            --accent-hover: #9333ea;
+            --border-color: #30363d;
+            --modal-bg: rgba(0, 0, 0, 0.75);
         }
 
-        /* Variáveis do Tema Claro */
         body.light-theme {
-            --bg-color: #f1f5f9;
+            --bg-color: #f8fafc;
             --card-bg: #ffffff;
-            --text-color: #0f172a;
-            --accent-color: #0284c7;
-            --text-muted: #64748b;
+            --text-color: #334155;
+            --heading-color: #0f172a;
+            --accent-color: #7c3aed;
+            --accent-hover: #6d28d9;
             --border-color: #e2e8f0;
-            --solution-bg: rgba(2, 132, 199, 0.08);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
@@ -42,248 +42,339 @@
         }
 
         header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 2rem auto;
-            position: relative;
-        }
-
-        .theme-toggle-btn {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
+            max-width: 900px;
+            margin: 0 auto 3rem auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
         }
 
         header h1 {
-            font-size: 2.5rem;
+            color: var(--heading-color);
+            font-size: 1.8rem;
+        }
+
+        header h1 span {
             color: var(--accent-color);
-            margin-bottom: 0.5rem;
         }
 
-        header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        /* Filtros */
-        .controls {
-            max-width: 1000px;
-            margin: 0 auto 2rem auto;
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background-color: var(--card-bg);
-            color: var(--text-color);
+        .theme-btn {
+            background: transparent;
             border: 1px solid var(--border-color);
-            padding: 0.5rem 1.2rem;
-            border-radius: 20px;
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-weight: 500;
         }
 
-        .filter-btn.active {
-            background-color: var(--accent-color);
-            color: #ffffff;
+        .theme-btn:hover {
             border-color: var(--accent-color);
         }
 
         main {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
-            display: grid;
-            gap: 2rem;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-
-        .dilemma-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .card-header {
+            display: flex;
             justify-content: space-between;
+            align-items: flex-start;
         }
 
-        .dilemma-card.hidden {
-            display: none;
+        .card-header h2 {
+            color: var(--heading-color);
+            font-size: 1.3rem;
         }
 
-        .category-tag {
-            display: inline-block;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            font-weight: bold;
+        .tag {
+            background-color: rgba(168, 85, 247, 0.15);
             color: var(--accent-color);
-            margin-bottom: 0.5rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
-        .dilemma-card h2 {
-            font-size: 1.4rem;
-            margin-bottom: 0.75rem;
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
         }
 
-        .dilemma-card p {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
+        .action-btn {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
         }
 
-        .solution-box {
-            background-color: var(--solution-bg);
-            border-left: 4px solid var(--accent-color);
+        .action-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .support-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .support-btn.supported {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Modal Styles */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--modal-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
             padding: 1rem;
-            border-radius: 0 8px 8px 0;
         }
 
-        .solution-box h3 {
-            font-size: 1rem;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .modal-backdrop.active {
+            opacity: 1;
+            pointer-events: all;
         }
 
-        .solution-box ul {
-            list-style-type: disc;
+        .modal-content {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .modal-content h3 {
+            color: var(--heading-color);
+            margin-bottom: 1rem;
+        }
+
+        .modal-content ul {
             padding-left: 1.2rem;
-            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
         }
 
-        .solution-box li {
-            margin-bottom: 0.3rem;
+        .modal-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            cursor: pointer;
         }
 
         footer {
             text-align: center;
-            margin-top: 4rem;
-            color: var(--text-muted);
+            max-width: 900px;
+            margin: 3rem auto 0 auto;
             font-size: 0.85rem;
+            color: var(--text-color);
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <button id="themeToggleBtn" class="theme-toggle-btn">☀️ Modo Claro</button>
-        <h1>Dilemas Digitais</h1>
-        <p>Explorando os impactos da tecnologia na sociedade e as caminhos para um futuro digital mais sustentável.</p>
+        <h1>Dilemas <span>Digitais</span></h1>
+        <button id="themeToggleBtn" class="theme-btn">🌙 Modo Escuro</button>
     </header>
 
-    <div class="controls">
-        <button class="filter-btn active" data-category="all">Todos</button>
-        <button class="filter-btn" data-category="privacidade">Privacidade</button>
-        <button class="filter-btn" data-category="sociedade">Sociedade</button>
-        <button class="filter-btn" data-category="ia">Inteligência Artificial</button>
-    </div>
-
     <main>
-        <!-- Dilema 1 -->
-        <article class="dilemma-card" data-category="privacidade">
-            <div>
-                <span class="category-tag">Privacidade</span>
-                <h2>1. Privacidade vs. Conveniência</h2>
-                <p>Para utilizar serviços gratuitos e personalizados, os usuários cedem grandes volumes de dados pessoais. O dilema surge no equilíbrio entre a facilidade de uso e o risco de vigilância ou uso indevido dessas informações.</p>
+        <!-- Card 1 -->
+        <article class="card">
+            <div class="card-header">
+                <h2>1. Vício em Redes Sociais & Economia da Atenção</h2>
+                <span class="tag">Comportamento</span>
             </div>
-            <aside class="solution-box">
-                <h3>Proposta de Solução</h3>
-                <ul>
-                    <li>Adoção rigorosa de legislações como a LGPD e GDPR.</li>
-                    <li>Incentivo ao uso de ferramentas com criptografia ponta a ponta.</li>
-                    <li>Educação digital focada em higiene de dados e permissões de aplicativos.</li>
-                </ul>
-            </aside>
+            <p>Plataformas digitais são desenhadas para maximizar o tempo de tela por meio de recompensas dopaminérgicas (curtidas, rolagem infinita). Isso impacta a saúde mental, reduz a capacidade de foco e gera dependência psicológica.</p>
+            <div class="card-footer">
+                <button class="support-btn" data-count="142">
+                    👍 Apoiar Causa (<span class="count">142</span>)
+                </button>
+                <button class="action-btn" onclick="openModal('vicio')">Ver Soluções Propostas</button>
+            </div>
         </article>
 
-        <!-- Dilema 2 -->
-        <article class="dilemma-card" data-category="sociedade">
-            <div>
-                <span class="category-tag">Sociedade</span>
-                <h2>2. Sobrecarga e Desinformação</h2>
-                <p>O fluxo contínuo de informações e os algoritmos focados em engajamento tendem a priorizar conteúdos sensacionalistas ou falsos, gerando ansiedade e polarização social.</p>
+        <!-- Card 2 -->
+        <article class="card">
+            <div class="card-header">
+                <h2>2. Bolhas de Filtro & Polarização</h2>
+                <p>Algoritmos de recomendação priorizam conteúdos que confirmam crenças prévias para aumentar o engajamento. Isso isola usuários em "câmaras de eco", reduz o contraditório e intensifica a polarização social.</p>
+                <span class="tag">Algoritmos</span>
             </div>
-            <aside class="solution-box">
-                <h3>Proposta de Solução</h3>
-                <ul>
-                    <li>Implementação de checagem de fatos nativa nas redes sociais.</li>
-                    <li>Prática do "detox digital" e curadoria consciente de fontes.</li>
-                    <li>Inclusão de letramento mediático no currículo escolar.</li>
-                </ul>
-            </aside>
+            <div class="card-footer">
+                <button class="support-btn" data-count="98">
+                    👍 Apoiar Causa (<span class="count">98</span>)
+                </button>
+                <button class="action-btn" onclick="openModal('bolhas')">Ver Soluções Propostas</button>
+            </div>
         </article>
 
-        <!-- Dilema 3 -->
-        <article class="dilemma-card" data-category="ia">
-            <div>
-                <span class="category-tag">Inteligência Artificial</span>
-                <h2>3. Automação e IA Ética</h2>
-                <p>O avanço rápido da inteligência artificial traz automação para diversos setores, levantando questões sobre substituição de empregos, viés algorítmico e direitos autorais.</p>
+        <!-- Card 3 -->
+        <article class="card">
+            <div class="card-header">
+                <h2>3. Direitos Autorais na Era da IA</h2>
+                <span class="tag">Legislação</span>
             </div>
-            <aside class="solution-box">
-                <h3>Proposta de Solução</h3>
-                <ul>
-                    <li>Desenvolvimento de IAs sob diretrizes de transparência e auditabilidade.</li>
-                    <li>Programas de requalificação profissional para trabalhadores impactados.</li>
-                    <li>Criação de marcos regulatórios internacionais para uso ético da IA.</li>
-                </ul>
-            </aside>
+            <p>Modelos de inteligência artificial gerativa são treinados com bilhões de obras artísticas e textos sem consentimento ou compensação aos criadores originais, gerando incerteza jurídica e financeira para a classe artística.</p>
+            <div class="card-footer">
+                <button class="support-btn" data-count="215">
+                    👍 Apoiar Causa (<span class="count">215</span>)
+                </button>
+                <button class="action-btn" onclick="openModal('autoral')">Ver Soluções Propostas</button>
+            </div>
         </article>
     </main>
 
+    <!-- Modal para Detalhes das Soluções -->
+    <div id="solutionModal" class="modal-backdrop">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h3 id="modalTitle">Título do Dilema</h3>
+            <ul id="modalList">
+                <!-- Conteúdo preenchido via JS -->
+            </ul>
+            <button class="action-btn" style="width: 100%;" onclick="closeModal()">Fechar</button>
+        </div>
+    </div>
+
     <footer>
-        <p>&copy; 2026 Dilemas Digitais. Conteúdo educativo sob licença aberta.</p>
+        <p>&copy; 2026 Dilemas Digitais. Desenvolvido para debate ético e tecnológico.</p>
     </footer>
 
     <script>
-        // --- Alternância de Tema (Claro / Escuro) ---
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-        
-        themeToggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('light-theme');
-            
-            if (document.body.classList.contains('light-theme')) {
-                themeToggleBtn.textContent = '🌙 Modo Escuro';
-            } else {
-                themeToggleBtn.textContent = '☀️ Modo Claro';
+        // --- Dados das Soluções para o Modal ---
+        const solutionsData = {
+            vicio: {
+                title: "Soluções para o Vício Digital",
+                solutions: [
+                    "Design Ético: Proibir mecanismos predatórios como autostart e rolagem infinita por padrão.",
+                    "Controle de Tempo Nativo: Ferramentas do sistema operacional que bloqueiam apps após limites diários configurados.",
+                    "Educação para o Bem-Estar: Conscientização sobre higiene digital em ambientes de trabalho e escolares."
+                ]
+            },
+            bolhas: {
+                title: "Soluções para Bolhas de Filtro",
+                solutions: [
+                    "Algoritmos Pluralistas: Introduzir feeds ordenados de forma cronológica ou com diversidade de fontes.",
+                    "Transparência Algorítmica: Permitir que o usuário entenda e ajuste os parâmetros do que é recomendado.",
+                    "Letramento Crítico: Incentivo à busca ativa de múltiplas perspectivas sobre o mesmo fato."
+                ]
+            },
+            autoral: {
+                title: "Soluções para Direitos Autorais",
+                solutions: [
+                    "Mecanismos de Opt-In/Opt-Out: Dar aos artistas o controle de autorizar ou proibir o uso de suas obras no treino de IAs.",
+                    "Royalty por Treinamento: Criar fundos ou compensações financeiras para criadores cujos trabalhos alimentam modelos de IA.",
+                    "Marca d'Água Digital: Uso obrigatório de identificadores em conteúdos gerados sinteticamente."
+                ]
             }
+        };
+
+        // --- Lógica do Modal ---
+        const modal = document.getElementById('solutionModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalList = document.getElementById('modalList');
+
+        function openModal(key) {
+            const data = solutionsData[key];
+            if (!data) return;
+
+            modalTitle.textContent = data.title;
+            modalList.innerHTML = '';
+            
+            data.solutions.forEach(text => {
+                const li = document.createElement('li');
+                li.textContent = text;
+                modalList.appendChild(li);
+            });
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        // Fechar modal ao clicar fora dele
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
         });
 
-        // --- Filtro por Categoria ---
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const cards = document.querySelectorAll('.dilemma-card');
+        // --- Alternância de Tema ---
+        const themeBtn = document.getElementById('themeToggleBtn');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
+            themeBtn.textContent = isLight ? '☀️ Modo Claro' : '🌙 Modo Escuro';
+        });
 
-        filterBtns.forEach(btn => {
+        // --- Botões de Apoio/Votação ---
+        const supportBtns = document.querySelectorAll('.support-btn');
+        supportBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Atualiza o botão ativo
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+                let countSpan = btn.querySelector('.count');
+                let count = parseInt(btn.getAttribute('data-count'));
 
-                const selectedCategory = btn.getAttribute('data-category');
+                if (btn.classList.contains('supported')) {
+                    btn.classList.remove('supported');
+                    count--;
+                } else {
+                    btn.classList.add('supported');
+                    count++;
+                }
 
-                // Esconde ou exibe os cards conforme a categoria selecionada
-                cards.forEach(card => {
-                    const cardCategory = card.getAttribute('data-category');
-                    
-                    if (selectedCategory === 'all' || cardCategory === selectedCategory) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
+                btn.setAttribute('data-count', count);
+                countSpan.textContent = count;
             });
         });
     </script>
-
 </body>
 </html>
