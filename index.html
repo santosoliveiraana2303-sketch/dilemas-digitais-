@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dilemas Digitais & Soluções Contemporâneas</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --accent-color: #38bdf8;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --solution-bg: rgba(56, 189, 248, 0.1);
+        }
+
+        /* Variáveis do Tema Claro */
+        body.light-theme {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --accent-color: #0284c7;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --solution-bg: rgba(2, 132, 199, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            position: relative;
+        }
+
+        .theme-toggle-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Filtros */
+        .controls {
+            max-width: 1000px;
+            margin: 0 auto 2rem auto;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border-color: var(--accent-color);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .dilemma-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .dilemma-card.hidden {
+            display: none;
+        }
+
+        .category-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .dilemma-card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .dilemma-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .solution-box {
+            background-color: var(--solution-bg);
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .solution-box h3 {
+            font-size: 1rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .solution-box ul {
+            list-style-type: disc;
+            padding-left: 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .solution-box li {
+            margin-bottom: 0.3rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button id="themeToggleBtn" class="theme-toggle-btn">☀️ Modo Claro</button>
+        <h1>Dilemas Digitais</h1>
+        <p>Explorando os impactos da tecnologia na sociedade e as caminhos para um futuro digital mais sustentável.</p>
+    </header>
+
+    <div class="controls">
+        <button class="filter-btn active" data-category="all">Todos</button>
+        <button class="filter-btn" data-category="privacidade">Privacidade</button>
+        <button class="filter-btn" data-category="sociedade">Sociedade</button>
+        <button class="filter-btn" data-category="ia">Inteligência Artificial</button>
+    </div>
+
+    <main>
+        <!-- Dilema 1 -->
+        <article class="dilemma-card" data-category="privacidade">
+            <div>
+                <span class="category-tag">Privacidade</span>
+                <h2>1. Privacidade vs. Conveniência</h2>
+                <p>Para utilizar serviços gratuitos e personalizados, os usuários cedem grandes volumes de dados pessoais. O dilema surge no equilíbrio entre a facilidade de uso e o risco de vigilância ou uso indevido dessas informações.</p>
+            </div>
+            <aside class="solution-box">
+                <h3>Proposta de Solução</h3>
+                <ul>
+                    <li>Adoção rigorosa de legislações como a LGPD e GDPR.</li>
+                    <li>Incentivo ao uso de ferramentas com criptografia ponta a ponta.</li>
+                    <li>Educação digital focada em higiene de dados e permissões de aplicativos.</li>
+                </ul>
+            </aside>
+        </article>
+
+        <!-- Dilema 2 -->
+        <article class="dilemma-card" data-category="sociedade">
+            <div>
+                <span class="category-tag">Sociedade</span>
+                <h2>2. Sobrecarga e Desinformação</h2>
+                <p>O fluxo contínuo de informações e os algoritmos focados em engajamento tendem a priorizar conteúdos sensacionalistas ou falsos, gerando ansiedade e polarização social.</p>
+            </div>
+            <aside class="solution-box">
+                <h3>Proposta de Solução</h3>
+                <ul>
+                    <li>Implementação de checagem de fatos nativa nas redes sociais.</li>
+                    <li>Prática do "detox digital" e curadoria consciente de fontes.</li>
+                    <li>Inclusão de letramento mediático no currículo escolar.</li>
+                </ul>
+            </aside>
+        </article>
+
+        <!-- Dilema 3 -->
+        <article class="dilemma-card" data-category="ia">
+            <div>
+                <span class="category-tag">Inteligência Artificial</span>
+                <h2>3. Automação e IA Ética</h2>
+                <p>O avanço rápido da inteligência artificial traz automação para diversos setores, levantando questões sobre substituição de empregos, viés algorítmico e direitos autorais.</p>
+            </div>
+            <aside class="solution-box">
+                <h3>Proposta de Solução</h3>
+                <ul>
+                    <li>Desenvolvimento de IAs sob diretrizes de transparência e auditabilidade.</li>
+                    <li>Programas de requalificação profissional para trabalhadores impactados.</li>
+                    <li>Criação de marcos regulatórios internacionais para uso ético da IA.</li>
+                </ul>
+            </aside>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Dilemas Digitais. Conteúdo educativo sob licença aberta.</p>
+    </footer>
+
+    <script>
+        // --- Alternância de Tema (Claro / Escuro) ---
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            
+            if (document.body.classList.contains('light-theme')) {
+                themeToggleBtn.textContent = '🌙 Modo Escuro';
+            } else {
+                themeToggleBtn.textContent = '☀️ Modo Claro';
+            }
+        });
+
+        // --- Filtro por Categoria ---
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.dilemma-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Atualiza o botão ativo
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const selectedCategory = btn.getAttribute('data-category');
+
+                // Esconde ou exibe os cards conforme a categoria selecionada
+                cards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    
+                    if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
