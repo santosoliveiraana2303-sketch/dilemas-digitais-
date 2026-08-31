@@ -3,183 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dilemas Digitais & Soluções</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #38bdf8;
-            --border: #334155;
-            --solution-bg: rgba(56, 189, 248, 0.1);
-        }
+    <title>Dilemas Digitais</title>
 
+    <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: #f4f7fb;
+            color: #222;
             line-height: 1.6;
-            padding: 2rem 1rem;
         }
 
         header {
+            background: linear-gradient(135deg, #4b6cb7, #182848);
+            color: white;
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto 3rem;
+            padding: 50px 20px;
         }
 
         header h1 {
-            font-size: 2.2rem;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
+            font-size: 42px;
+            margin-bottom: 10px;
         }
 
         header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 18px;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        nav {
+            background-color: #111827;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #4b6cb7;
         }
 
         main {
             max-width: 1100px;
-            margin: 0 auto;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        .titulo {
+            text-align: center;
+            color: #182848;
+            margin-bottom: 25px;
+            font-size: 30px;
+        }
+
+        .introducao {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
 
         .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid #4b6cb7;
         }
 
-        .tag {
-            display: inline-block;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
+        .card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
         }
 
-        .card h2 {
-            font-size: 1.3rem;
-            margin-bottom: 0.75rem;
+        .card h3 {
+            color: #182848;
+            margin-bottom: 12px;
         }
 
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1.25rem;
+        .problema {
+            color: #c0392b;
+            font-weight: bold;
         }
 
-        .solution-box {
-            background-color: var(--solution-bg);
-            border-left: 4px solid var(--accent);
-            padding: 1rem;
-            border-radius: 0 8px 8px 0;
+        .solucao {
+            color: #16803c;
+            font-weight: bold;
+            margin-top: 15px;
         }
 
-        .solution-box h3 {
-            font-size: 0.9rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
+        .passos {
+            background: linear-gradient(135deg, #e8f0ff, #f5f8ff);
+            padding: 30px;
+            border-radius: 15px;
         }
 
-        .solution-box ul {
-            list-style-type: disc;
-            padding-left: 1.2rem;
-            font-size: 0.9rem;
+        .passos ol {
+            padding-left: 25px;
         }
 
-        .solution-box li {
-            margin-bottom: 0.3rem;
+        .passos li {
+            margin: 12px 0;
+        }
+
+        .quiz {
+            background-color: #182848;
+            color: white;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .quiz button {
+            background-color: #4b6cb7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            margin-top: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .quiz button:hover {
+            background-color: #6989d1;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
         }
 
         footer {
+            background-color: #111827;
+            color: white;
             text-align: center;
-            margin-top: 4rem;
-            color: var(--text-muted);
-            font-size: 0.85rem;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 32px;
+            }
+
+            .titulo {
+                font-size: 25px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <header>
-        <h1>Dilemas Digitais</h1>
-        <p>Análise dos impactos da tecnologia na sociedade e propostas práticas para o futuro.</p>
+        <h1>📱 Dilemas Digitais</h1>
+        <p>
+            Tecnologia faz parte da nossa vida. Mas como podemos usá-la
+            de maneira consciente, segura e responsável?
+        </p>
     </header>
 
+    <nav>
+        <a href="#inicio">Início</a>
+        <a href="#dilemas">Dilemas</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#quiz">Quiz</a>
+    </nav>
+
     <main>
-        <!-- Dilema 1 -->
-        <article class="card">
-            <div>
-                <span class="tag">Privacidade</span>
-                <h2>1. Privacidade vs. Conveniência</h2>
-                <p>Para usar serviços gratuitos e personalizados, os usuários cedem volumes massivos de dados pessoais, criando um impasse entre facilidade de uso e risco de vigilância.</p>
-            </div>
-            <div class="solution-box">
-                <h3>Propostas de Solução</h3>
-                <ul>
-                    <li>Aplicação rigorosa de leis de proteção de dados (LGPD/GDPR).</li>
-                    <li>Adoção de ferramentas com criptografia ponta a ponta.</li>
-                    <li>Educação sobre gestão de permissões em aplicativos.</li>
-                </ul>
-            </div>
-        </article>
 
-        <!-- Dilema 2 -->
-        <article class="card">
-            <div>
-                <span class="tag">Sociedade</span>
-                <h2>2. Sobrecarga e Desinformação</h2>
-                <p>O fluxo contínuo de conteúdos e algoritmos focados em engajamento tendem a priorizar informações sensacionalistas, alimentando a ansiedade e a polarização.</p>
-            </div>
-            <div class="solution-box">
-                <h3>Propostas de Solução</h3>
-                <ul>
-                    <li>Mecanismos nativos de checagem de fatos nas plataformas.</li>
-                    <li>Prática de curadoria consciente e períodos de detox digital.</li>
-                    <li>Inclusão de letramento midiático nas escolas.</li>
-                </ul>
-            </div>
-        </article>
+        <section id="inicio">
+            <h2 class="titulo">O que são dilemas digitais?</h2>
 
-        <!-- Dilema 3 -->
-        <article class="card">
-            <div>
-                <span class="tag">Inteligência Artificial</span>
-                <h2>3. Automação e IA Ética</h2>
-                <p>O avanço rápido da automação e da IA traz ganhos de produtividade, mas levanta dúvidas sobre substituição de empregos, viés algorítmico e uso de propriedade intelectual.</p>
-            </div>
-            <div class="solution-box">
-                <h3>Propostas de Solução</h3>
-                <ul>
-                    <li>Criação de diretrizes de transparência e auditabilidade em IAs.</li>
-                    <li>Programas de requalificação profissional para trabalhadores.</li>
-                    <li>Marcos regulatórios para uso ético de modelos gerativos.</li>
-                </ul>
-            </div>
-        </article>
-    </main>
+            <div class="introducao">
+                <p>
+                    Dilemas digitais são situações em que precisamos tomar
+                    decisões relacionadas ao uso da tecnologia e da internet.
+                    Eles podem envolver privacidade, redes sociais,
+                    inteligência artificial, cyberbullying, desinformação
+                    e excesso de tempo diante das telas.
+                </p>
 
-    <footer>
-        <p>&copy; 2026 Dilemas Digitais — Projeto Educativo</p>
-    </footer>
+                <br>
 
-</body>
-</html>
+                <p>
+                    O objetivo deste site é apresentar esses problemas e
+                    mostrar propostas de soluções que podem ajudar a construir
+                    uma relação mais saudável com o mundo digital.
+                </p>
+            </div>
+        </section>
+
+        <section id="dilemas">
+            <h2 class="titulo">Principais dilemas digitais</h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>🔐 Privacidade na internet</h3>
+                    <p class="problema">Problema:</p>
+                    <p>
+                        Muitas pessoas compartilham dados pessoais sem perceber
+                        os riscos, como informações de localização, fotos,
+                        senhas e dados pessoais.
+                    </p>
+
+                    <p class="solucao">Proposta de solução:</p>
+                    <p>
+                        Utilizar senhas fortes, autenticação em dois fatores,
+                        revisar as configurações de privacidade e evitar
+                        compartilhar informações pessoais publicamente.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>📱 Uso excessivo das redes sociais</h3>
+                    <p class="problema">Problema:</p>
+                    <p>
+                        O uso exagerado de redes sociais pode prejudicar a
+                        concentração, o sono, os estudos e a convivência
+                        presencial.
+                    </p>
+
+                    <p class="solucao">Proposta de solução:</p>
+                    <p>
+                        Estabelecer limites de tempo, desativar notificações
+                        des
