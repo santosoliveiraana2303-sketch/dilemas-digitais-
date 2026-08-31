@@ -1,91 +1,963 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dilemas Digitais & Soluções</title>
+
+    <title>Dilemas Digitais | Tecnologia Consciente</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+
+        /* =========================
+           CONFIGURAÇÕES GERAIS
+        ========================== */
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f6f9;
-            color: #333;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
         }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #06140e;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           MENU
+        ========================== */
+
         header {
-            background-color: #1a252f;
-            color: #fff;
-            padding: 2rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(3, 15, 10, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #163d2a;
+        }
+
+        .menu {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #39ff88;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #39ff88;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+
+            background:
+                linear-gradient(
+                    rgba(2, 15, 9, 0.78),
+                    rgba(2, 15, 9, 0.92)
+                ),
+                url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2000&q=80");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 8vw, 80px);
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .verde {
+            color: #39ff88;
+            text-shadow: 0 0 25px rgba(57, 255, 136, 0.35);
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #d5e9dc;
+            margin-bottom: 35px;
+        }
+
+        .botao {
+            display: inline-block;
+            background: #39ff88;
+            color: #031009;
+            padding: 14px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 0 25px rgba(57, 255, 136, 0.25);
+        }
+
+        .botao:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 35px rgba(57, 255, 136, 0.5);
+        }
+
+        /* =========================
+           SEÇÕES
+        ========================== */
+
+        section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 90px 25px;
+        }
+
+        .titulo {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 40px;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #9bb9a7;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+
+        /* =========================
+           INTRODUÇÃO
+        ========================== */
+
+        .intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .intro img {
+            width: 100%;
+            border-radius: 25px;
+            border: 1px solid #1c5739;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .intro-text h2 {
+            color: #39ff88;
+            margin-bottom: 20px;
+            font-size: 30px;
+        }
+
+        .intro-text p {
+            color: #c5d8cb;
+            margin-bottom: 15px;
+        }
+
+        /* =========================
+           CARDS
+        ========================== */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: linear-gradient(
+                145deg,
+                #0c2418,
+                #081910
+            );
+
+            border: 1px solid #17472d;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #39ff88;
+            box-shadow: 0 15px 40px rgba(57,255,136,0.12);
+        }
+
+        .card img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card h3 {
+            color: #39ff88;
+            margin-bottom: 12px;
+            font-size: 22px;
+        }
+
+        .card p {
+            color: #b8cdbf;
+        }
+
+        .problema {
+            color: #ff7c7c !important;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .solucao {
+            color: #39ff88 !important;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* =========================
+           SOLUÇÕES
+        ========================== */
+
+        .solucoes {
+            background: #091d13;
+            max-width: 100%;
+        }
+
+        .solucoes-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 90px 25px;
+        }
+
+        .lista-solucoes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .solucao-item {
+            background: #0d281a;
+            border: 1px solid #194e32;
+            padding: 25px;
+            border-radius: 18px;
+            transition: 0.3s;
+        }
+
+        .solucao-item:hover {
+            border-color: #39ff88;
+        }
+
+        .numero {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #39ff88;
+            color: #06140e;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .solucao-item h3 {
+            margin-bottom: 8px;
+        }
+
+        .solucao-item p {
+            color: #abc3b3;
+        }
+
+        /* =========================
+           FRASE
+        ========================== */
+
+        .frase {
+            text-align: center;
+            padding: 100px 25px;
+            background:
+                linear-gradient(
+                    rgba(3, 18, 11, 0.9),
+                    rgba(3, 18, 11, 0.9)
+                ),
+                url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2000&q=80");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .frase h2 {
+            font-size: 42px;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .frase span {
+            color: #39ff88;
+        }
+
+        /* =========================
+           QUIZ
+        ========================== */
+
+        .quiz {
+            max-width: 800px;
+            margin: auto;
+            background: #0b2116;
+            border: 1px solid #1c5435;
+            padding: 40px;
+            border-radius: 25px;
             text-align: center;
         }
-        main {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+
+        .quiz h2 {
+            color: #39ff88;
+            margin-bottom: 20px;
         }
-        article {
-            background: #fff;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+        .quiz p {
+            color: #d0ded5;
+            font-size: 18px;
         }
-        h2 {
-            color: #2c3e50;
-            margin-top: 0;
+
+        .quiz button {
+            border: none;
+            margin: 20px 8px 0;
+            padding: 13px 22px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            background: #173c28;
+            color: white;
+            transition: 0.3s;
         }
-        .solucao {
-            background-color: #e8f8f5;
-            border-left: 4px solid #2ecc71;
-            padding: 1rem;
-            margin-top: 1rem;
+
+        .quiz button:hover {
+            background: #39ff88;
+            color: #06140e;
         }
+
+        #resultado {
+            margin-top: 25px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* =========================
+           RODAPÉ
+        ========================== */
+
         footer {
             text-align: center;
-            padding: 1rem;
-            background-color: #1a252f;
-            color: #fff;
-            margin-top: 2rem;
+            padding: 35px 20px;
+            background: #020b06;
+            border-top: 1px solid #163b28;
         }
+
+        footer p {
+            color: #789484;
+        }
+
+        footer strong {
+            color: #39ff88;
+        }
+
+        /* =========================
+           RESPONSIVIDADE
+        ========================== */
+
+        @media (max-width: 850px) {
+
+            .menu {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .intro {
+                grid-template-columns: 1fr;
+            }
+
+            .cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .lista-solucoes {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .frase h2 {
+                font-size: 30px;
+            }
+
+            .quiz {
+                padding: 25px;
+            }
+        }
+
     </style>
 </head>
+
 <body>
 
+    <!-- MENU -->
+
     <header>
-        <h1>Dilemas Digitais & Caminhos de Solução</h1>
-        <p>Refletindo sobre o impacto da tecnologia na sociedade moderna</p>
+
+        <div class="menu">
+
+            <div class="logo">
+                DIGI<span>VERDE</span> 🌱
+            </div>
+
+            <nav>
+                <a href="#inicio">Início</a>
+                <a href="#dilemas">Dilemas</a>
+                <a href="#solucoes">Soluções</a>
+                <a href="#quiz">Quiz</a>
+            </nav>
+
+        </div>
+
     </header>
 
-    <main>
-        <article>
-            <h2>1. Privacidade vs. Conveniência</h2>
-            <p><strong>O Dilema:</strong> Redes sociais e serviços gratuitos coletam dados pessoais massivos para personalizar conteúdos e anúncios, reduzindo a privacidade do usuário.</p>
-            <div class="solucao">
-                <strong>Proposta de Solução:</strong> Uso de regulamentações como a LGPD, conscientização sobre higiene digital e adoção de navegadores e buscadores focados em privacidade.
-            </div>
-        </article>
 
-        <article>
-            <h2>2. Desinformação e Bolhas de Informação</h2>
-            <p><strong>O Dilema:</strong> Algoritmos de recomendação priorizam conteúdos apelativos para reter atenção, facilitando a proliferação de notícias falsas e a polarização.</p>
-            <div class="solucao">
-                <strong>Proposta de Solução:</strong> Educação midiática nas escolas, verificação de fontes por agências independentes e ajuste de algoritmos com maior transparência.
-            </div>
-        </article>
+    <!-- HERO -->
 
-        <article>
-            <h2>3. Vício em Tela e Saúde Mental</h2>
-            <p><strong>O Dilema:</strong> Mecanismos de design apelativos (como a rolagem infinita) mantêm usuários conectados por horas, impactando o sono e a saúde mental.</p>
-            <div class="solucao">
-                <strong>Proposta de Solução:</strong> Implementação de limites de tempo de uso pelos próprios dispositivos, prática de "detox digital" e adoção de práticas de design ético pelas empresas.
+    <div class="hero" id="inicio">
+
+        <div class="hero-content">
+
+            <h1>
+                Dilemas <span class="verde">Digitais</span>
+            </h1>
+
+            <p>
+                Tecnologia transforma o mundo.
+                Cabe a nós decidir como utilizá-la.
+            </p>
+
+            <a href="#dilemas" class="botao">
+                Explorar dilemas →
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- INTRODUÇÃO -->
+
+    <section>
+
+        <div class="intro">
+
+            <img
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80"
+                alt="Pessoa utilizando computador">
+
+            <div class="intro-text">
+
+                <h2>🌐 Vivemos conectados</h2>
+
+                <p>
+                    Celulares, computadores, redes sociais e inteligência
+                    artificial fazem parte da nossa rotina.
+                </p>
+
+                <p>
+                    Porém, junto com as oportunidades surgem novos desafios.
+                    Privacidade, segurança, desinformação e uso excessivo
+                    da tecnologia são alguns deles.
+                </p>
+
+                <p>
+                    Este projeto apresenta alguns dos principais
+                    <strong>dilemas digitais</strong> e ideias para
+                    enfrentá-los de maneira consciente.
+                </p>
+
             </div>
-        </article>
-    </main>
+
+        </div>
+
+    </section>
+
+
+    <!-- DILEMAS -->
+
+    <section id="dilemas">
+
+        <h2 class="titulo">
+            Principais <span class="verde">dilemas</span>
+        </h2>
+
+        <p class="subtitulo">
+            Conheça alguns dos desafios que encontramos no mundo digital
+            e entenda por que eles merecem nossa atenção.
+        </p>
+
+
+        <div class="cards">
+
+            <!-- CARD 1 -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80"
+                    alt="Segurança digital">
+
+                <div class="card-content">
+
+                    <h3>🔐 Privacidade</h3>
+
+                    <p>
+                        Nossos dados pessoais circulam diariamente pela
+                        internet.
+                    </p>
+
+                    <p class="problema">
+                        O problema
+                    </p>
+
+                    <p>
+                        Informações podem ser coletadas ou expostas
+                        sem que percebamos.
+                    </p>
+
+                    <p class="solucao">
+                        💡 Solução
+                    </p>
+
+                    <p>
+                        Usar senhas fortes, autenticação em dois fatores
+                        e revisar as configurações de privacidade.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CARD 2 -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80"
+                    alt="Redes sociais">
+
+                <div class="card-content">
+
+                    <h3>📱 Redes sociais</h3>
+
+                    <p>
+                        As redes sociais aproximam pessoas e informações.
+                    </p>
+
+                    <p class="problema">
+                        O problema
+                    </p>
+
+                    <p>
+                        O excesso de uso pode prejudicar nossa atenção,
+                        rotina e relações pessoais.
+                    </p>
+
+                    <p class="solucao">
+                        💡 Solução
+                    </p>
+
+                    <p>
+                        Criar limites de tempo e reservar momentos
+                        sem celular.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CARD 3 -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=800&q=80"
+                    alt="Notícias e informação">
+
+                <div class="card-content">
+
+                    <h3>📰 Desinformação</h3>
+
+                    <p>
+                        Notícias podem alcançar milhares de pessoas
+                        em poucos segundos.
+                    </p>
+
+                    <p class="problema">
+                        O problema
+                    </p>
+
+                    <p>
+                        Informações falsas podem influenciar decisões
+                        e causar prejuízos.
+                    </p>
+
+                    <p class="solucao">
+                        💡 Solução
+                    </p>
+
+                    <p>
+                        Conferir fontes, datas e comparar diferentes
+                        veículos antes de compartilhar.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CARD 4 -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80"
+                    alt="Inteligência artificial">
+
+                <div class="card-content">
+
+                    <h3>🤖 Inteligência Artificial</h3>
+
+                    <p>
+                        A IA pode ajudar a estudar, criar e solucionar
+                        problemas.
+                    </p>
+
+                    <p class="problema">
+                        O problema
+                    </p>
+
+                    <p>
+                        Sistemas de IA podem apresentar erros ou informações
+                        incorretas.
+                    </p>
+
+                    <p class="solucao">
+                        💡 Solução
+                    </p>
+
+                    <p>
+                        Conferir informações e utilizar a tecnologia
+                        com pensamento crítico.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CARD 5 -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80"
+                    alt="Pessoa utilizando celular">
+
+                <div class="card-content">
+
+                    <h3>💬 Cyberbullying</h3>
+
+                    <p>
+                        A internet também pode ser utilizada para
+                        agressões e humilhações.
+                    </p>
+
+                    <p class="problema">
+                        O problema
+                    </p>
+
+                    <p>
+                        Comentários ofensivos podem causar consequências
+                        sérias para quem sofre a agressão.
+                    </p>
+
+                    <p class="solucao">
+                        💡 Solução
+                    </p>
+
+                    <p>
+                        Não participar, bloquear, denunciar e procurar
+                        ajuda de alguém de confiança.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CARD 6 -->
+
+            <div class="card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"
+                    alt="Tecnologia e computador">
+
+                <div class="card-content">
+
+                    <h3>⚖️ Equilíbrio digital</h3>
+
+                    <p>
+                        A tecnologia deve fazer parte da vida,
+                        mas não dominar toda a nossa rotina.
+                    </p>
+
+                    <p class="problema">
+                        O problema
+                    </p>
+
+                    <p>
+                        Passar tempo demais conectado pode afetar
+                        estudos, sono e convivência.
+                    </p>
+
+                    <p class="solucao">
+                        💡 Solução
+                    </p>
+
+                    <p>
+                        Criar uma rotina equilibrada entre tecnologia,
+                        estudos, lazer e vida social.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SOLUÇÕES -->
+
+    <div class="solucoes" id="solucoes">
+
+        <div class="solucoes-container">
+
+            <h2 class="titulo">
+                Construindo um futuro <span class="verde">melhor</span>
+            </h2>
+
+            <p class="subtitulo">
+                Pequenas atitudes podem transformar nossa relação
+                com a tecnologia.
+            </p>
+
+
+            <div class="lista-solucoes">
+
+                <div class="solucao-item">
+                    <div class="numero">01</div>
+                    <h3>Proteja seus dados</h3>
+                    <p>
+                        Evite compartilhar informações pessoais
+                        desnecessariamente e proteja suas contas.
+                    </p>
+                </div>
+
+                <div class="solucao-item">
+                    <div class="numero">02</div>
+                    <h3>Questione informações</h3>
+                    <p>
+                        Antes de acreditar ou compartilhar algo,
+                        procure fontes confiáveis.
+                    </p>
+                </div>
+
+                <div class="solucao-item">
+                    <div class="numero">03</div>
+                    <h3>Controle seu tempo</h3>
+                    <p>
+                        Estabeleça períodos para ficar longe das telas
+                        e aproveite atividades fora da internet.
+                    </p>
+                </div>
+
+                <div class="solucao-item">
+                    <div class="numero">04</div>
+                    <h3>Use a IA com responsabilidade</h3>
+                    <p>
+                        Utilize ferramentas de inteligência artificial
+                        como apoio, sempre verificando os resultados.
+                    </p>
+                </div>
+
+                <div class="solucao-item">
+                    <div class="numero">05</div>
+                    <h3>Respeite as pessoas</h3>
+                    <p>
+                        Não pratique ou incentive agressões,
+                        humilhações ou perseguições na internet.
+                    </p>
+                </div>
+
+                <div class="solucao-item">
+                    <div class="numero">06</div>
+                    <h3>Pense antes de clicar</h3>
+                    <p>
+                        Links, arquivos e mensagens desconhecidas
+                        podem esconder riscos.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FRASE -->
+
+    <div class="frase">
+
+        <h2>
+            "A tecnologia é uma ferramenta.
+            <span>O futuro depende de como escolhemos usá-la.</span>"
+        </h2>
+
+    </div>
+
+
+    <!-- QUIZ -->
+
+    <section id="quiz">
+
+        <div class="quiz">
+
+            <h2>🧠 Teste seus conhecimentos</h2>
+
+            <p>
+                Você recebeu uma notícia muito chocante em um grupo.
+                O que deve fazer antes de compartilhá-la?
+            </p>
+
+            <button onclick="resposta(true)">
+                🔎 Verificar a fonte
+            </button>
+
+            <button onclick="resposta(false)">
+                📢 Compartilhar imediatamente
+            </button>
+
+            <div id="resultado"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RODAPÉ -->
 
     <footer>
-        <p>&copy; 2026 - Projeto Dilemas Digitais</p>
+
+        <p>
+            <strong>DIGIVERDE</strong> 🌱
+        </p>
+
+        <p>
+            Projeto educativo sobre tecnologia,
+            cidadania e responsabilidade digital.
+        </p>
+
+        <br>
+
+        <p>
+            © 2026 - Todos os direitos reservados
+        </p>
+
     </footer>
 
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function resposta(correta) {
+
+            const resultado =
+                document.getElementById("resultado");
+
+            if (correta) {
+
+                resultado.innerHTML =
+                    "✅ Correto! Sempre verifique a fonte antes de compartilhar uma informação.";
+
+                resultado.style.color = "#39ff88";
+
+            } else {
+
+                resultado.innerHTML =
+                    "❌ Cuidado! Compartilhar sem verificar pode ajudar a espalhar desinformação.";
+
+                resultado.style.color = "#ff7c7c";
+            }
+
+        }
+
+    </script>
+
 </body>
+
 </html>
